@@ -1,0 +1,30 @@
+{
+  "name": "server-side",
+  "version": "1.0.0",
+  "description": "Express server for electrician app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Victoriablu/server-side.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Victoriablu/server-side/issues"
+  },
+  "homepage": "https://github.com/Victoriablu/server-side#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "expect": "^26.1.0",
+    "mocha": "^8.0.1",
+    "nodemon": "^2.0.4"
+  }
+}
