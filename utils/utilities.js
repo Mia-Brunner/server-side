@@ -1,5 +1,6 @@
 let dataFile = "../data/quotes.json"
 let appQuotes = require(dataFile)
+const fs = require("fs")
 
 const getAllQuotes = function(req) {
 	return appQuotes
@@ -86,3 +87,4 @@ module.exports = {
     updateQuote,
 	getDataFileRelativeToApp
 }
+
