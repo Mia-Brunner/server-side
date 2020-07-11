@@ -48,6 +48,23 @@ app.use(cors({
 	}
 }));
 
+app.use(session({
+	// resave and saveUninitialized set to false for deprecation warnings
+	secret: "Express is awesome",
+	resave: false,
+	saveUninitialized: false,
+	cookie: {
+			maxAge: 1800000
+	},
+	store: new MongoStore({
+			mongooseConnection: mongoose.connection
+	})
+}));
+
+app.use(passport.initialize())
+app.use(passport.session())
+require("./config/passport")
+
 // Define routes 
 app.use("/quotes", quoteRouter)
 app.use("/auth", authRouter)
