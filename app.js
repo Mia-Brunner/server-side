@@ -50,7 +50,7 @@ app.use(cors({
 
 // Define routes 
 app.use("/quotes", quoteRouter)
-app.use("/auth", authRouter)
+// app.use("/auth", authRouter)
 
 app.listen(port, () => {
 	console.log(`Electrician app listening on port ${port}`)
