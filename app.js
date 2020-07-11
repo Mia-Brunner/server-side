@@ -5,11 +5,48 @@ const mongoose = require("mongoose")
 const quoteRouter = require("./routes/quotes_routes")
 const authRouter = require('./routes/auth_routes');
 
-const port = 3000
+
+const port = process.env.PORT || 3000
 
 const app = express()
-app.use(cors())
+
 app.use(bodyParser.json())
+// If we are not running in production, load our local .env
+if(process.env.NODE_ENV !== 'production') {
+	require('dotenv').config();
+}
+
+const dbConn = process.env.MONGODB_URI || 'mongodb://localhost/electrician'
+
+// Set three properties to avoid deprecation warnings:
+// useNewUrlParser: true
+// useUnifiedTopology: true
+// useFileAndModify: false
+// useCreateIndex: true
+mongoose.connect(dbConn, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+        useFindAndModify: false,
+        useCreateIndex: true
+    },
+    (err) => {
+        if (err) {
+            console.log('Error connecting to database', err);
+        } else {
+            console.log('Connected to database',dbConn);
+        }
+		});
+		
+const whitelist = ['http://localhost:3000','https://pacific-woodland-56783.herokuapp.com/']
+app.use(cors({
+	credentials: true,
+	origin: function (origin,callback) {
+			// Check each url in whitelist and see if it includes the origin (instead of matching exact string)
+			const whitelistIndex = whitelist.findIndex((url) => url.includes(origin))
+			console.log("found whitelistIndex", whitelistIndex)
+			callback(null,whitelistIndex > -1)
+	}
+}));
 
 // Define routes 
 app.use("/quotes", quoteRouter)
