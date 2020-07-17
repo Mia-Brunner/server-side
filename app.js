@@ -2,21 +2,26 @@ const express = require("express")
 const cors = require("cors")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
+const passport = require('passport');
+// const passportLocalMongoose = require('passport-local-mongoose');
+// const session = require('express-session');
 const quoteRouter = require("./routes/quotes_routes")
 const authRouter = require('./routes/auth_routes');
-
+const userRouter = require('./routes/users_router');
 
 const port = process.env.PORT || 3000
+// const port = 3000
 
 const app = express()
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 // If we are not running in production, load our local .env
 if(process.env.NODE_ENV !== 'production') {
 	require('dotenv').config();
 }
 
 const dbConn = process.env.MONGODB_URI || 'mongodb://localhost/electrician'
+// const dbConn = 'mongodb://localhost/electrician'
 
 // Set three properties to avoid deprecation warnings:
 // useNewUrlParser: true
@@ -48,9 +53,28 @@ app.use(cors({
 	}
 }));
 
+// app.use(session({
+// 	// resave and saveUninitialized set to false for deprecation warnings
+// 	secret: "Express is awesome",
+// 	resave: false,
+// 	saveUninitialized: false,
+// 	cookie: {
+// 			maxAge: 1800000
+// 	},
+// 	store: new MongoStore({
+// 			mongooseConnection: mongoose.connection
+// 	})
+// }));
+
+app.use(passport.initialize())
+app.use(passport.session())
+require("./config/passport")
+
 // Define routes 
 app.use("/quotes", quoteRouter)
-// app.use("/auth", authRouter)
+app.use("/auth", authRouter)
+app.use('/users', userRouter)
+
 
 app.listen(port, () => {
 	console.log(`Electrician app listening on port ${port}`)

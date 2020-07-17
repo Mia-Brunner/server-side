@@ -1,7 +1,9 @@
 const express = require("express")
 const router = express.Router()
 
-const { getQuotes, getQuote, makeQuote, deleteQuote, changeQuote } = require("../controllers/quotes_controller")
+const { getQuotes, getQuote, makeQuote, removeQuote, changeQuote } 
+= require("../controllers/quotes_controller")
+
 // READ
 // GET on '/quotes'
 // Returns all quotes
@@ -14,13 +16,13 @@ router.get("/:id", getQuote)
 
 // CREATE
 // POST on '/quotes'
-// Creates a new quote
+//  Creates a new quote
 router.post("/", makeQuote)
 
 // DELETE
 // DELETE on '/quote/:id'
 // Deletes a quote with id
-router.delete("/:id", deleteQuote)
+router.delete("/:id", removeQuote)
 
 // UPDATE
 // PUT on 'quote/:id'

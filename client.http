@@ -1,1 +1,9 @@
-GET http://localhost:3000/quotes
+GET HTTP://localhost:3000/quotes
+
+###
+POST HTTP://localhost:3000/auth/login
+{
+  "username":"admin",
+  "email":"admin@admin.com",
+  "password":""
+}
