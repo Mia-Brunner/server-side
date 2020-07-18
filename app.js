@@ -53,6 +53,22 @@ app.use(cors({
 	}
 }));
 
+// Quotes form on homepage
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+ });
+ 
+ app.post('/quotes', (req, res) => {
+	const { name, phone, message } = req.body;
+	const quote = new Quote({
+		name,
+        phone,
+        message
+	});
+	quote.save().catch(err => err);
+	console.log(`Name: ${name}\nPhone: ${phone}\nMessage": ${message}`);
+    res.sendFile(__dirname + '/quotes.html');
+
 // app.use(session({
 // 	// resave and saveUninitialized set to false for deprecation warnings
 // 	secret: "Express is awesome",
@@ -78,4 +94,4 @@ app.use('/users', userRouter)
 
 app.listen(port, () => {
 	console.log(`Electrician app listening on port ${port}`)
-})
+}) })
