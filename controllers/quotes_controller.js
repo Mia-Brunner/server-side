@@ -49,7 +49,7 @@ const makeQuote = function(req, res) {
 
 const removeQuote = function(req, res) {
 			// execute the query from deleteQuote
-			deletequote(req.params.id).exec(err => {
+			deleteQuote(req.params.id).exec(err => {
 				if (err) {
 					res.status(500)
 					res.json({
@@ -61,14 +61,6 @@ const removeQuote = function(req, res) {
 		}
 
 const changeQuote = function(req, res) {
-	// let quote = updateQuote(req)
-	// if (quote) {
-	// 	res.status(200)
-	// 	res.send(quote)
-	// } else {
-	// 	res.status(500)
-	// 	res.send(`Error occurred: ${req.error}`)
-	// }
 		// Check for error from middleware
 		if (req.error) {
 			res.status(req.error.status)
