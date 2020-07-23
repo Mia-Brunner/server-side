@@ -10,7 +10,15 @@ const authRouter = require('./routes/auth_routes');
 const userRouter = require('./routes/users_router');
 
 const port = process.env.PORT || 3009
+<<<<<<< HEAD
+<<<<<<< HEAD
 // const port = 3009
+=======
+// const port = 3000
+>>>>>>> 672e10fda4085dd2504ae15bb2f7df0afcd0b727
+=======
+// const port = 3009
+>>>>>>> 0daa7604631e3905651862c4380a5ff7eddd0ebb
 
 const app = express()
 
