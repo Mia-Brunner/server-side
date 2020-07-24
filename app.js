@@ -2,9 +2,10 @@ const express = require("express")
 const cors = require("cors")
 const bodyParser = require("body-parser")
 const mongoose = require("mongoose")
+const session = require('express-session');
+const MongoStore = require("connect-mongo")(session)
 const passport = require('passport');
-// const passportLocalMongoose = require('passport-local-mongoose');
-// const session = require('express-session');
+const passportLocalMongoose = require('passport-local-mongoose')
 const quoteRouter = require("./routes/quotes_routes")
 const authRouter = require('./routes/auth_routes');
 const userRouter = require('./routes/users_router');
@@ -23,11 +24,7 @@ if(process.env.NODE_ENV !== 'production') {
 const dbConn = process.env.MONGODB_URI || 'mongodb://localhost/electrician'
 // const dbConn = 'mongodb://localhost/electrician'
 
-// Set three properties to avoid deprecation warnings:
-// useNewUrlParser: true
-// useUnifiedTopology: true
-// useFileAndModify: false
-// useCreateIndex: true
+//  avoid deprecation warnings:
 mongoose.connect(dbConn, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -53,22 +50,29 @@ app.use(cors({
 	}
 }));
 
-// app.use(session({
-// 	// resave and saveUninitialized set to false for deprecation warnings
-// 	secret: "Express is awesome",
-// 	resave: false,
-// 	saveUninitialized: false,
-// 	cookie: {
-// 			maxAge: 1800000
-// 	},
-// 	store: new MongoStore({
-// 			mongooseConnection: mongoose.connection
-// 	})
-// }));
+app.use(session({
+    // resave and saveUninitialized set to false for deprecation warnings
+    secret: "Express is awesome",
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 1800000
+    },
+    store: new MongoStore({
+        mongooseConnection: mongoose.connection
+    })
+}));
 
 app.use(passport.initialize())
 app.use(passport.session())
 require("./config/passport")
+
+app.get('/', (req, res) => {
+    console.log('get on /');
+    console.log('req.session', req.session)
+    console.log('req.user', req.user)
+    res.send('got your request');
+})
 
 // Define routes 
 app.use("/quotes", quoteRouter)
