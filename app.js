@@ -11,7 +11,8 @@ const authRouter = require('./routes/auth_routes');
 const userRouter = require('./routes/users_router');
 
 const port = process.env.PORT || 3009
-// const port = 3000
+// const port = 3009
+
 
 const app = express()
 
@@ -50,6 +51,7 @@ app.use(cors({
 	}
 }));
 
+
 app.use(session({
     // resave and saveUninitialized set to false for deprecation warnings
     secret: "Express is awesome",
@@ -62,6 +64,23 @@ app.use(session({
         mongooseConnection: mongoose.connection
     })
 }));
+
+// Quotes form on homepage
+// app.get('/', (req, res) => {
+//     res.sendFile(__dirname + '/index.html');
+//  });
+ 
+//  app.post('/quotes', (req, res) => {
+// 	const { name, phone, message } = req.body;
+// 	const quote = new Quote({
+// 		name,
+//         phone,
+//         message
+// 	});
+// 	quote.save().catch(err => err);
+// 	console.log(`Name: ${name}\nPhone: ${phone}\nMessage": ${message}`);
+//     res.sendFile(__dirname + '/quotes.html');
+
 
 app.use(passport.initialize())
 app.use(passport.session())
@@ -82,4 +101,4 @@ app.use('/users', userRouter)
 
 app.listen(port, () => {
 	console.log(`Electrician app listening on port ${port}`)
-})
+}) })
