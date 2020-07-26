@@ -101,4 +101,4 @@ app.use('/users', userRouter)
 
 app.listen(port, () => {
 	console.log(`Electrician app listening on port ${port}`)
-}) })
+})
