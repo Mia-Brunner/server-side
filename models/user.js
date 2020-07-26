@@ -11,13 +11,13 @@ const User = new Schema({
 		type: String,
 		required: true
   }
-//   role: {
-//     type: String,
-//   },
-//   blocked: {
-//     type: Boolean,
-//     default: false
-// }
+  role: {
+    type: String,
+  },
+  blocked: {
+    type: Boolean,
+    default: false
+}
 })
 
 // plugin the passport-local-mongoose middleware with our User schema
