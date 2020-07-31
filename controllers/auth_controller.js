@@ -36,8 +36,7 @@ const logout = function (req, res) {
 // helper functions
 const authenticate = passport.authenticate('local');
 
-function loginUser(req, res) {
-  // passport.authenticate returns a function that we will call with req, res, and a callback function to execute on success    
+function loginUser(req, res) { 
 
   authenticate(req, res, function () {
       console.log('authenticated', req.user.username);
