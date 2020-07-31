@@ -38,7 +38,7 @@ mongoose.connect(dbConn, {
         }
 		});
 		
-const whitelist = ['http://localhost:3000','https://pacific-woodland-56783.herokuapp.com/']
+const whitelist = ['http://localhost:3000','https://pid-electrical-services.netlify.app']
 app.use(cors({
 	credentials: true,
 	origin: function (origin,callback) {
