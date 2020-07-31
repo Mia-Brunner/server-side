@@ -8,7 +8,6 @@ const User = new Schema({
 		type: String,
 		required: true
   }
-
 })
 
 // plugin the passport-local-mongoose middleware with our User schema

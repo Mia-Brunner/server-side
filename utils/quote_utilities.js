@@ -15,10 +15,8 @@ const getQuoteById = function(req) {
 // add quote
 // returns a quote object
 const addQuote = function (req) {
-	let date = Date.now();
-	// Set date for this new post
-	req.body.create_date = date;
-	req.body.modified_date = date;
+
+	console.log(req.body)
 	return new Quote(req.body);
 };
 

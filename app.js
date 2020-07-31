@@ -12,7 +12,6 @@ const userRouter = require('./routes/users_router');
 
 const port = process.env.PORT || 3009
 
-
 const app = express()
 
 app.use(bodyParser.json());
@@ -62,6 +61,30 @@ app.use(session({
     })
 }));
 
+// Database connection for Quotes form
+const Quote = mongoose.model('Quote');
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// Quotes form on homepage
+
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
+ 
+//app.post('/quotes', (req, res) => {
+   // const { name, phone, message } = req.body;
+   // const quote = new Quote({
+     //       name,
+       //     phone,
+         //   message
+    //});
+   // quote.save().catch(err => err);
+   // console.log(`Name: ${name}\nPhone: ${phone}\nMessage": ${message}`);
+   // res.sendFile(__dirname + '/quotes.html');
+//})
+
 app.use(passport.initialize())
 app.use(passport.session())
 require("./config/passport")
@@ -82,3 +105,4 @@ app.use('/users', userRouter)
 app.listen(port, () => {
 	console.log(`Electrician app listening on port ${port}`)
 }) 
+

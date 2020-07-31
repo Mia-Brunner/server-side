@@ -34,9 +34,10 @@ const getQuote = function(req, res) {
 }
 
 const makeQuote = function(req, res) {
-	// save the Quoteinstance from addQuote
+	// save the Quote instance from addQuote
 	addQuote(req).save((err, quote) => {
 		if (err) {
+			console.log(err)
 			res.status(500)
 			res.json({
 				error: err.message
