@@ -39,14 +39,17 @@ mongoose.connect(dbConn, {
 		});
 		
 const whitelist = ['http://localhost:3000','https://pid-electrical-services.netlify.app']
-app.use(cors({
-	credentials: true,
-	origin: function (origin,callback) {
-			const whitelistIndex = whitelist.findIndex((url) => url.includes(origin))
-			console.log("found whitelistIndex", whitelistIndex)
-			callback(null,whitelistIndex > -1)
-	}
-}));
+
+app.use(cors)
+
+//app.use(cors({
+//	credentials: true,
+//	origin: function (origin,callback) {
+//			const whitelistIndex = whitelist.findIndex((url) => url.includes(origin))
+//			console.log("found whitelistIndex", whitelistIndex)
+//			callback(null,whitelistIndex > -1)
+//	}
+//}));
 
 app.enable('trust proxy');
 
