@@ -40,7 +40,10 @@ mongoose.connect(dbConn, {
 		
 const whitelist = ['http://localhost:3000','https://pid-electrical-services.netlify.app']
 
-app.use(cors())
+app.use(cors({
+        credentials: true
+}
+))
 
 //app.use(cors({
 //	credentials: true,
