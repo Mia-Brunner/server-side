@@ -48,12 +48,17 @@ app.use(cors({
 	}
 }));
 
+app.enable('trust proxy');
 
 app.use(session({
     secret: "Express is awesome",
     resave: false,
     saveUninitialized: false,
+    proxy: true,
     cookie: {
+        secure: true,
+        sameSite: "none",
+        httpOnly: false,
         maxAge: 1800000
     },
     store: new MongoStore({
