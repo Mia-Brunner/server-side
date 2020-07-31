@@ -38,7 +38,7 @@ mongoose.connect(dbConn, {
         }
 		});
 		
-const whitelist = ['http://localhost:3000','https://pacific-woodland-56783.herokuapp.com/']
+const whitelist = ['http://localhost:3000','https://pid-electrical-services.netlify.app']
 app.use(cors({
 	credentials: true,
 	origin: function (origin,callback) {
@@ -48,12 +48,17 @@ app.use(cors({
 	}
 }));
 
+app.enable('trust proxy');
 
 app.use(session({
     secret: "Express is awesome",
     resave: false,
     saveUninitialized: false,
+    proxy: true,
     cookie: {
+        secure: true,
+        sameSite: "none",
+        httpOnly: false,
         maxAge: 1800000
     },
     store: new MongoStore({
